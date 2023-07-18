@@ -15,12 +15,6 @@ public class Main {
         unidadeDeMedida.criarUnidadeDeMedidaPadrao(3,"mL");
         unidadeDeMedida.criarUnidadeDeMedidaPadrao(4,"unidade");
 
-        Connection conexao = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
-        conexao = ConexaoPadrao.conector();
-        System.out.println(conexao);
 
     }
 }

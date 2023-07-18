@@ -30,14 +30,14 @@ public class FormaDePagamento {
 
 
         Connection conexao = ConexaoPadrao.conector();
-        String sql = "SELECT COUNT(*) FROM tbFormaPagamento WHERE id = ?";
+        String sql = "SELECT COUNT(*) FROM tbFormaPagamento WHERE idFormaPagamento = ?";
         try (PreparedStatement pst = conexao.prepareStatement(sql)) {
             pst.setInt(1, getId());
             try (ResultSet resultado = pst.executeQuery()) {
                 resultado.next();
                 int count = resultado.getInt(1);
                 if(count == 0){
-                    sql = "INSERT INTO tbFormaPagamento (id,Descricao) VALUES (?,?)";
+                    sql = "INSERT INTO tbFormaPagamento (idFormaPagamento,Descricao) VALUES (?,?)";
 
                     try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
                         stmt.setInt(1, getId());
