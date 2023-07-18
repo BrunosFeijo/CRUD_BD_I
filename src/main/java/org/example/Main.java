@@ -3,6 +3,8 @@ package org.example;
 import com.sun.source.tree.IfTree;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -111,6 +113,26 @@ public class Main {
                         idFormaPagamento = entrada.nextInt();
                     }
                     Contrato contrato = new Contrato(id, data, vigencia, idFormaPagamento);
+
+                    int idProduto = 0;
+                    List<Produto> produtos = new ArrayList<>();
+                    List<Integer> quantidades = new ArrayList<>();
+                    do{
+                        System.out.print("Digite o id do produto que deve ser inserido no contrato (ou 0 para sair): ");
+                        idProduto = entrada.nextInt();
+                        if (idProduto > 0){
+                            Produto produto = new Produto();
+                            produto.setId(idProduto);
+                            produtos.add(produto);
+
+                            System.out.print("Digite a quantidade de produtos neste contrato: ");
+                            int quantidade = entrada.nextInt();
+                            quantidades.add(quantidade);
+                        }
+                    }while(idProduto > 0);
+
+                    contrato.setProdutos(produtos.toArray(new Produto[0]));
+                    contrato.setQuantidades(quantidades.toArray(new Integer[0]));
 
                     contrato.inserir();
                 }
