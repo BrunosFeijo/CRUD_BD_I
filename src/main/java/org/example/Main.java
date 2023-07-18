@@ -78,6 +78,7 @@ public class Main {
                     Produto produto = new Produto();
                     Produto [] produtos = produto.selecionar();
 
+                    System.out.println("| %-10s | %-20s | %-50s | R$ %.2f   | %-10s |");
                     for(Produto prod: produtos){
                         System.out.println(prod);
                     }
