@@ -1,5 +1,7 @@
 package org.example;
 
+import com.sun.source.tree.IfTree;
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -84,31 +86,45 @@ public class Main {
                     produto.deletar(id);
                 }
                 case 5 -> {
-                    System.out.print("Digite o id do produto que será alterado");
+                    System.out.print("Digite o id do contrato");
                     int id = entrada.nextInt();
-                    System.out.print("Digite o nome do produto");
-                    String nome = entrada.nextLine();
-                    System.out.print("Digite a descrição do produto");
-                    String descricao = entrada.nextLine();
-                    System.out.print("Digite o valor do produto");
-                    float valor = entrada.nextFloat();
-                    System.out.println("Unidades de medida disponíveis no momento? (kkk)");
-                    System.out.println("1- Centímetro (cm)");
-                    System.out.println("2- Grama (g)");
-                    System.out.println("3- Mililítro (mL)");
-                    System.out.println("4- Unidade (un)");
+                    System.out.print("Digite a data de emissão do contrato no formato('YYYY-MM-DD')");
+                    Date data = Date.valueOf(entrada.nextLine());
+                    System.out.print("Digite o tempo de vigência do contrato");
+                    int vigencia = entrada.nextInt();
+                    System.out.println("Formas de Pagamento disponíveis no momento? (kkk)");
+                    System.out.println("1- A prazo");
+                    System.out.println("2- Á vista");
                     System.out.print("Digite uma opção: ");
-                    int idUnidadeDeMedida = entrada.nextInt();
-                    while(idUnidadeDeMedida <= 0 || idUnidadeDeMedida > 4){
+                    int idFormaPagamento = entrada.nextInt();
+                    while(idFormaPagamento <= 0 || idFormaPagamento > 2){
                         System.out.print("Digite uma opção válida: ");
-                        idUnidadeDeMedida = entrada.nextInt();
+                        idFormaPagamento = entrada.nextInt();
                     }
-                    Produto produto = new Produto(id,nome,descricao,valor,idUnidadeDeMedida);
+                    Contrato contrato = new Contrato(id,data,vigencia,idFormaPagamento);
 
-                    produto.atualizar();
-
+                    contrato.inserir();
                 }
-                case 6 ->System.out.println();
+                case 6 -> {
+                    System.out.print("Digite o id do contrato a ser atualizado");
+                    int id = entrada.nextInt();
+                    System.out.print("Digite a data de emissão do contrato no formato('YYYY-MM-DD')");
+                    Date data = Date.valueOf(entrada.nextLine());
+                    System.out.print("Digite o tempo de vigência do contrato");
+                    int vigencia = entrada.nextInt();
+                    System.out.println("Formas de Pagamento disponíveis no momento? (kkk)");
+                    System.out.println("1- A prazo");
+                    System.out.println("2- Á vista");
+                    System.out.print("Digite uma opção: ");
+                    int idFormaPagamento = entrada.nextInt();
+                    while(idFormaPagamento <= 0 || idFormaPagamento > 2){
+                        System.out.print("Digite uma opção válida: ");
+                        idFormaPagamento = entrada.nextInt();
+                    }
+                    Contrato contrato = new Contrato(id,data,vigencia,idFormaPagamento);
+
+                    contrato.atualizar();
+                }
                 case 7 ->System.out.println();
                 case 8 ->System.out.println();
                 default -> System.out.println("Opção Inválida!!");
