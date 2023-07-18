@@ -125,8 +125,18 @@ public class Main {
 
                     contrato.atualizar();
                 }
-                case 7 ->System.out.println();
-                case 8 ->System.out.println();
+                case 7 -> {
+                    Contrato contrato = new Contrato();
+                    contrato.selecionar();
+                }
+                case 8 -> {
+                    System.out.print("Digite o Id do contrato que deseja deletar: ");
+                    int id = entrada.nextInt();
+
+                    Contrato contrato = new Contrato();
+                    contrato.deletar(id);
+
+                }
                 default -> System.out.println("Opção Inválida!!");
             }
 

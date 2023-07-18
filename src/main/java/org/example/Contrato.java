@@ -68,7 +68,7 @@ public class Contrato {
     public void selecionar(){
 
     }
-    public void deletar(){
+    public void deletar(int id){
 
     }
 }
