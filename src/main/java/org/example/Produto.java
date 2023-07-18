@@ -80,6 +80,7 @@ public class Produto {
 
             preparedStatement.close();
             conexao.close();
+            System.out.println("Operação executada com sucesso");
         } catch (SQLException e) {
             System.out.println("Ocorreu um erro na inserção do novo produto");
             //throw new RuntimeException(e);
@@ -89,17 +90,19 @@ public class Produto {
     public void atualizar() {
         try {
             Connection conexao = ConexaoPadrao.conector();
-            PreparedStatement preparedStatement = conexao.prepareStatement("update mydb.tbProduto set Nome = ?, Descricao = ?, ValorUnitario = ?, idUnidadeMedida = ? where id = ?");
-            preparedStatement.setString(2, this.nome);
-            preparedStatement.setString(3, this.descricao);
-            preparedStatement.setFloat(4, this.valorUnitario);
-            preparedStatement.setInt(5, this.idUnidadeMediada);
-            preparedStatement.setInt(1, this.id);
+            PreparedStatement preparedStatement = conexao.prepareStatement("update mydb.tbProduto set Nome = ?, Descricao = ?, ValorUnitario = ?, idUnidadeMedida = ? where idProduto = ?");
+            preparedStatement.setString(1, this.nome);
+            preparedStatement.setString(2, this.descricao);
+            preparedStatement.setFloat(3, this.valorUnitario);
+            preparedStatement.setInt(4, this.idUnidadeMediada);
+            preparedStatement.setInt(5, this.id);
 
             preparedStatement.execute();
 
             preparedStatement.close();
             conexao.close();
+
+            System.out.println("Operação executada com sucesso");
         } catch (SQLException e) {
             System.out.println("Ocorreu um erro na atualização do produto");
             //throw new RuntimeException(e);
@@ -126,6 +129,7 @@ public class Produto {
             resultSet.close();
             preparedStatement.close();
             conexao.close();
+
         } catch (SQLException e) {
             System.out.println("Ocorreu um erro na lista de produtos");
             //throw new RuntimeException(e);
@@ -136,13 +140,14 @@ public class Produto {
     public void deletar(int id) {
         try {
             Connection conexao = ConexaoPadrao.conector();
-            PreparedStatement preparedStatement = conexao.prepareStatement("delete from mydb.tbProduto where id = ?");
+            PreparedStatement preparedStatement = conexao.prepareStatement("delete from mydb.tbProduto where idProduto = ?");
 
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
 
             preparedStatement.close();
             conexao.close();
+            System.out.println("Operação executada com sucesso");
         } catch (SQLException e) {
             System.out.println("Ocorreu um erro ao deletar produto");
             //throw new RuntimeException(e);
@@ -151,7 +156,7 @@ public class Produto {
 
     @Override
     public String toString() {
-        return String.format("| %-10s | %-20s | %-50s | R$ %.2f   | %-10s |",
+        return String.format("| %-10s | %-20s | %-50s | R$ %.2f       | %-15s |",
                 id, nome, descricao, valorUnitario,idUnidadeMediada);
     }
 }

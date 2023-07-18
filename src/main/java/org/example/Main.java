@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
+        //Pra não precisar me estressar com Forma de pagamento e Unidade de Medida
         FormaDePagamento formaDePagamento = new FormaDePagamento();
         formaDePagamento.criarFormaDePagamentoPadrao(1, "a prazo");
         formaDePagamento.criarFormaDePagamentoPadrao(2, "à vista");
@@ -26,13 +27,14 @@ public class Main {
             switch (opcao) {
                 case 0 -> System.out.println("Programa Finalizado!!");
                 case 1 -> {
-                    System.out.print("Digite o id do produto");
+                    System.out.print("Digite o id do produto: ");
                     int id = entrada.nextInt();
-                    System.out.print("Digite o nome do produto");
+                    System.out.print("Digite o nome do produto: ");
+                    entrada.nextLine(); // quebra de linha no buffer
                     String nome = entrada.nextLine();
-                    System.out.print("Digite a descrição do produto");
+                    System.out.print("Digite a descrição do produto: ");
                     String descricao = entrada.nextLine();
-                    System.out.print("Digite o valor do produto");
+                    System.out.print("Digite o valor do produto: ");
                     float valor = entrada.nextFloat();
                     System.out.println("Unidades de medida disponíveis no momento? (kkk)");
                     System.out.println("1- Centímetro (cm)");
@@ -41,23 +43,24 @@ public class Main {
                     System.out.println("4- Unidade (un)");
                     System.out.print("Digite uma opção: ");
                     int idUnidadeDeMedida = entrada.nextInt();
-                    while(idUnidadeDeMedida <= 0 || idUnidadeDeMedida > 4){
+                    while (idUnidadeDeMedida <= 0 || idUnidadeDeMedida > 4) {
                         System.out.print("Digite uma opção válida: ");
                         idUnidadeDeMedida = entrada.nextInt();
                     }
-                    Produto produto = new Produto(id,nome,descricao,valor,idUnidadeDeMedida);
+                    Produto produto = new Produto(id, nome, descricao, valor, idUnidadeDeMedida);
 
                     produto.inserir();
 
                 }
                 case 2 -> {
-                    System.out.print("Digite o id do produto que será alterado");
+                    System.out.print("Digite o id do produto que será alterado: ");
                     int id = entrada.nextInt();
-                    System.out.print("Digite o nome do produto");
+                    System.out.print("Digite o nome do produto: ");
+                    entrada.nextLine(); // quebra de linha no buffer
                     String nome = entrada.nextLine();
-                    System.out.print("Digite a descrição do produto");
+                    System.out.print("Digite a descrição do produto: ");
                     String descricao = entrada.nextLine();
-                    System.out.print("Digite o valor do produto");
+                    System.out.print("Digite o valor do produto: ");
                     float valor = entrada.nextFloat();
                     System.out.println("Unidades de medida disponíveis no momento? (kkk)");
                     System.out.println("1- Centímetro (cm)");
@@ -66,20 +69,20 @@ public class Main {
                     System.out.println("4- Unidade (un)");
                     System.out.print("Digite uma opção: ");
                     int idUnidadeDeMedida = entrada.nextInt();
-                    while(idUnidadeDeMedida <= 0 || idUnidadeDeMedida > 4){
+                    while (idUnidadeDeMedida <= 0 || idUnidadeDeMedida > 4) {
                         System.out.print("Digite uma opção válida: ");
                         idUnidadeDeMedida = entrada.nextInt();
                     }
-                    Produto produto = new Produto(id,nome,descricao,valor,idUnidadeDeMedida);
+                    Produto produto = new Produto(id, nome, descricao, valor, idUnidadeDeMedida);
 
                     produto.atualizar();
                 }
                 case 3 -> {
                     Produto produto = new Produto();
-                    Produto [] produtos = produto.selecionar();
+                    Produto[] produtos = produto.selecionar();
 
-                    System.out.println("| %-10s | %-20s | %-50s | R$ %.2f   | %-10s |");
-                    for(Produto prod: produtos){
+                    System.out.printf("| %-10s | %-20s | %-50s | %-5s   | %-10s |\n","ID","Nome","Descrição","ValorUnitário","IdUnidadeMedida");
+                    for (Produto prod : produtos) {
                         System.out.println(prod);
                     }
                 }
@@ -91,42 +94,44 @@ public class Main {
                     produto.deletar(id);
                 }
                 case 5 -> {
-                    System.out.print("Digite o id do contrato");
+                    System.out.print("Digite o id do contrato: ");
                     int id = entrada.nextInt();
-                    System.out.print("Digite a data de emissão do contrato no formato('YYYY-MM-DD')");
+                    System.out.print("Digite a data de emissão do contrato no formato('YYYY-MM-DD'): ");
+                    entrada.nextLine(); // quebra de linha no buffer
                     Date data = Date.valueOf(entrada.nextLine());
-                    System.out.print("Digite o tempo de vigência do contrato");
+                    System.out.print("Digite o tempo de vigência do contrato: ");
                     int vigencia = entrada.nextInt();
                     System.out.println("Formas de Pagamento disponíveis no momento? (kkk)");
                     System.out.println("1- A prazo");
                     System.out.println("2- Á vista");
                     System.out.print("Digite uma opção: ");
                     int idFormaPagamento = entrada.nextInt();
-                    while(idFormaPagamento <= 0 || idFormaPagamento > 2){
+                    while (idFormaPagamento <= 0 || idFormaPagamento > 2) {
                         System.out.print("Digite uma opção válida: ");
                         idFormaPagamento = entrada.nextInt();
                     }
-                    Contrato contrato = new Contrato(id,data,vigencia,idFormaPagamento);
+                    Contrato contrato = new Contrato(id, data, vigencia, idFormaPagamento);
 
                     contrato.inserir();
                 }
                 case 6 -> {
-                    System.out.print("Digite o id do contrato a ser atualizado");
+                    System.out.print("Digite o id do contrato a ser atualizado: ");
                     int id = entrada.nextInt();
-                    System.out.print("Digite a data de emissão do contrato no formato('YYYY-MM-DD')");
+                    System.out.print("Digite a data de emissão do contrato no formato('YYYY-MM-DD'): ");
+                    entrada.nextLine(); // quebra de linha no buffer
                     Date data = Date.valueOf(entrada.nextLine());
-                    System.out.print("Digite o tempo de vigência do contrato");
+                    System.out.print("Digite o tempo de vigência do contrato: ");
                     int vigencia = entrada.nextInt();
                     System.out.println("Formas de Pagamento disponíveis no momento? (kkk)");
                     System.out.println("1- A prazo");
                     System.out.println("2- Á vista");
                     System.out.print("Digite uma opção: ");
                     int idFormaPagamento = entrada.nextInt();
-                    while(idFormaPagamento <= 0 || idFormaPagamento > 2){
+                    while (idFormaPagamento <= 0 || idFormaPagamento > 2) {
                         System.out.print("Digite uma opção válida: ");
                         idFormaPagamento = entrada.nextInt();
                     }
-                    Contrato contrato = new Contrato(id,data,vigencia,idFormaPagamento);
+                    Contrato contrato = new Contrato(id, data, vigencia, idFormaPagamento);
 
                     contrato.atualizar();
                 }
@@ -148,8 +153,9 @@ public class Main {
 
         } while (opcao != 0);
     }
+
     public static void menu() {
-        System.out.println("---------Menu---------");
+        System.out.println("|---------Menu---------|");
         System.out.println("1- Inserir Produto");
         System.out.println("2- Atualizar Produto");
         System.out.println("3- Listar Produtos");
@@ -159,7 +165,7 @@ public class Main {
         System.out.println("7- Listar Contratos");
         System.out.println("8- Deletar Contrato");
         System.out.println("0- Sair");
-        System.out.println("----------------------");
+        System.out.println("|----------------------|");
         System.out.print("Digite a opção desejada: ");
     }
 
