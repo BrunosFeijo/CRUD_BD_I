@@ -110,28 +110,14 @@ public class Contrato {
     public void atualizar() {
         try {
             Connection conexao = ConexaoPadrao.conector();
-            PreparedStatement preparedStatement = conexao.prepareStatement("insert into mydb.tbContrato (idContrato,DataEmissao,TempoVigencia,idFormaPagamento) value (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement = conexao.prepareStatement("update mydb.tbContrato set DataEmissao = ?,TempoVigencia = ? ,idFormaPagamento = ? where idContrato = ?");
 
-            preparedStatement.setInt(1, id);
-            preparedStatement.setDate(2, dataEmissao);
-            preparedStatement.setInt(3, tempoVigencia);
-            preparedStatement.setInt(4, idFormaDePagamento);
+            preparedStatement.setDate(1, dataEmissao);
+            preparedStatement.setInt(2, tempoVigencia);
+            preparedStatement.setInt(3, idFormaDePagamento);
+            preparedStatement.setInt(4, id);
             preparedStatement.execute();
 
-            ResultSet resultSet = preparedStatement.getGeneratedKeys();
-            if (resultSet.next()) {
-                this.id = resultSet.getInt(1);
-            }
-            for (int i = 0; i < this.produtos.length; i++) {
-                preparedStatement = conexao.prepareStatement("insert into mydb.tbContrato_has_tbProduto (idContrato,idProduto,Quantidade) values (?,?,?)");
-                preparedStatement.setInt(1,id);
-                preparedStatement.setInt(2, produtos[i].getId());
-                preparedStatement.setInt(3, quantidades[i]);
-
-                preparedStatement.execute();
-            }
-
-            resultSet.close();
             preparedStatement.close();
             conexao.close();
             System.out.println("Operação executada com sucesso");
