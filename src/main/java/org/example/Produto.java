@@ -7,6 +7,18 @@ public class Produto {
     private float valorUnitario;
     private int idUnidadeMediada;
 
+    public Produto() {
+
+    }
+
+    public Produto(int id, String nome, String descricao, float valorUnitario, int idUnidadeMediada) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.valorUnitario = valorUnitario;
+        this.idUnidadeMediada = idUnidadeMediada;
+    }
+
     public int getId() {
         return id;
     }
@@ -55,7 +67,7 @@ public class Produto {
     public void selecionar(){
 
     }
-    public void deletar(){
+    public void deletar(int id){
 
     }
 }

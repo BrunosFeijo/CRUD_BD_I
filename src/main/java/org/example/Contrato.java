@@ -9,6 +9,17 @@ public class Contrato {
     private int idFormaDePagamento;
     private int[] idProduto;
 
+    public Contrato(){
+
+    }
+
+    public Contrato(int id, Date dataEmissao, int tempoVigencia, int idFormaDePagamento) {
+        this.id = id;
+        this.dataEmissao = dataEmissao;
+        this.tempoVigencia = tempoVigencia;
+        this.idFormaDePagamento = idFormaDePagamento;
+    }
+
     public int getId() {
         return id;
     }

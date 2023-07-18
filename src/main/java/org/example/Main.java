@@ -14,7 +14,7 @@ public class Main {
         unidadeDeMedida.criarUnidadeDeMedidaPadrao(1, "cm");
         unidadeDeMedida.criarUnidadeDeMedidaPadrao(2, "g");
         unidadeDeMedida.criarUnidadeDeMedidaPadrao(3, "mL");
-        unidadeDeMedida.criarUnidadeDeMedidaPadrao(4, "unidade");
+        unidadeDeMedida.criarUnidadeDeMedidaPadrao(4, "un");
 
         Scanner entrada = new Scanner(System.in);
         int opcao = 0;
@@ -22,12 +22,92 @@ public class Main {
             menu();
             opcao = entrada.nextInt();
             switch (opcao) {
-                case 0 -> System.out.println();
-                case 1 ->System.out.println();
-                case 2 ->System.out.println();
-                case 3 ->System.out.println();
-                case 4 ->System.out.println();
-                case 5 ->System.out.println();
+                case 0 -> System.out.println("Programa Finalizado!!");
+                case 1 -> {
+                    System.out.print("Digite o id do produto");
+                    int id = entrada.nextInt();
+                    System.out.print("Digite o nome do produto");
+                    String nome = entrada.nextLine();
+                    System.out.print("Digite a descrição do produto");
+                    String descricao = entrada.nextLine();
+                    System.out.print("Digite o valor do produto");
+                    float valor = entrada.nextFloat();
+                    System.out.println("Unidades de medida disponíveis no momento? (kkk)");
+                    System.out.println("1- Centímetro (cm)");
+                    System.out.println("2- Grama (g)");
+                    System.out.println("3- Mililítro (mL)");
+                    System.out.println("4- Unidade (un)");
+                    System.out.print("Digite uma opção: ");
+                    int idUnidadeDeMedida = entrada.nextInt();
+                    while(idUnidadeDeMedida <= 0 || idUnidadeDeMedida > 4){
+                        System.out.print("Digite uma opção válida: ");
+                        idUnidadeDeMedida = entrada.nextInt();
+                    }
+                    Produto produto = new Produto(id,nome,descricao,valor,idUnidadeDeMedida);
+
+                    produto.inserir();
+
+                }
+                case 2 -> {
+                    System.out.print("Digite o id do produto que será alterado");
+                    int id = entrada.nextInt();
+                    System.out.print("Digite o nome do produto");
+                    String nome = entrada.nextLine();
+                    System.out.print("Digite a descrição do produto");
+                    String descricao = entrada.nextLine();
+                    System.out.print("Digite o valor do produto");
+                    float valor = entrada.nextFloat();
+                    System.out.println("Unidades de medida disponíveis no momento? (kkk)");
+                    System.out.println("1- Centímetro (cm)");
+                    System.out.println("2- Grama (g)");
+                    System.out.println("3- Mililítro (mL)");
+                    System.out.println("4- Unidade (un)");
+                    System.out.print("Digite uma opção: ");
+                    int idUnidadeDeMedida = entrada.nextInt();
+                    while(idUnidadeDeMedida <= 0 || idUnidadeDeMedida > 4){
+                        System.out.print("Digite uma opção válida: ");
+                        idUnidadeDeMedida = entrada.nextInt();
+                    }
+                    Produto produto = new Produto(id,nome,descricao,valor,idUnidadeDeMedida);
+
+                    produto.atualizar();
+                }
+                case 3 -> {
+                    Produto produto = new Produto();
+                    produto.selecionar();
+                }
+                case 4 -> {
+                    System.out.print("Digite o Id do produto que deseja deletar: ");
+                    int id = entrada.nextInt();
+
+                    Produto produto = new Produto();
+                    produto.deletar(id);
+                }
+                case 5 -> {
+                    System.out.print("Digite o id do produto que será alterado");
+                    int id = entrada.nextInt();
+                    System.out.print("Digite o nome do produto");
+                    String nome = entrada.nextLine();
+                    System.out.print("Digite a descrição do produto");
+                    String descricao = entrada.nextLine();
+                    System.out.print("Digite o valor do produto");
+                    float valor = entrada.nextFloat();
+                    System.out.println("Unidades de medida disponíveis no momento? (kkk)");
+                    System.out.println("1- Centímetro (cm)");
+                    System.out.println("2- Grama (g)");
+                    System.out.println("3- Mililítro (mL)");
+                    System.out.println("4- Unidade (un)");
+                    System.out.print("Digite uma opção: ");
+                    int idUnidadeDeMedida = entrada.nextInt();
+                    while(idUnidadeDeMedida <= 0 || idUnidadeDeMedida > 4){
+                        System.out.print("Digite uma opção válida: ");
+                        idUnidadeDeMedida = entrada.nextInt();
+                    }
+                    Produto produto = new Produto(id,nome,descricao,valor,idUnidadeDeMedida);
+
+                    produto.atualizar();
+
+                }
                 case 6 ->System.out.println();
                 case 7 ->System.out.println();
                 case 8 ->System.out.println();
@@ -51,5 +131,5 @@ public class Main {
         System.out.println("--------------------");
         System.out.print("Digite a opção desejada: ");
     }
-    
+
 }
