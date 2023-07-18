@@ -48,4 +48,16 @@ public class Contrato {
     public void setIdProduto(int[] idProduto) {
         this.idProduto = idProduto;
     }
+    public void inserir(){
+
+    }
+    public void atualizar(){
+
+    }
+    public void selecionar(){
+
+    }
+    public void deletar(){
+
+    }
 }

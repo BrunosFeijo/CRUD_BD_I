@@ -46,4 +46,16 @@ public class Produto {
     public void setIdUnidadeMediada(int idUnidadeMediada) {
         this.idUnidadeMediada = idUnidadeMediada;
     }
+    public void inserir(){
+
+    }
+    public void atualizar(){
+
+    }
+    public void selecionar(){
+
+    }
+    public void deletar(){
+
+    }
 }
