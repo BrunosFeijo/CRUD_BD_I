@@ -19,7 +19,5 @@ public class ConexaoPadrao {
         }catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 }
