@@ -90,7 +90,7 @@ public class Contrato {
             }
             for (int i = 0; i < this.produtos.length; i++) {
                 preparedStatement = conexao.prepareStatement("insert into mydb.tbContrato_has_tbProduto (idContrato,idProduto,Quantidade) values (?,?,?)");
-                preparedStatement.setInt(1,id);
+                preparedStatement.setInt(1, id);
                 preparedStatement.setInt(2, produtos[i].getId());
                 preparedStatement.setInt(3, quantidades[i]);
 
@@ -129,9 +129,48 @@ public class Contrato {
 
     public void selecionar() {
 
+        try {
+            Connection conexao = ConexaoPadrao.conector();
+            String sql = "SELECT c.idContrato, c.DataEmissao, c.TempoVigencia, p.idProduto, p.Nome, p.Descricao, p.ValorUnitario, cp.Quantidade " +
+                    "FROM tbContrato c " +
+                    "JOIN tbContrato_has_tbProduto cp ON c.idContrato = cp.idContrato " +
+                    "JOIN tbProduto p ON cp.idProduto = p.idProduto";
+
+            PreparedStatement preparedStatement = conexao.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int idContrato = resultSet.getInt("idContrato");
+                String produto = resultSet.getString("Nome");
+                int quantidade = resultSet.getInt("Quantidade");
+                Date dataEmissao = resultSet.getDate("DataEmissao");
+                System.out.println("Contrato ID: " + idContrato + ", DataEmissao : " + dataEmissao +  ", Produto: " + produto + ", Quantidade: " + quantidade);
+            }
+            resultSet.close();
+            preparedStatement.close();
+            conexao.close();
+        } catch (SQLException e) {
+            System.out.println("Ocorreu um erro ao deletar produto");
+            //throw new RuntimeException(e);
+        }
     }
 
     public void deletar(int id) {
+        try {
+            Connection conexao = ConexaoPadrao.conector();
+            PreparedStatement preparedStatement = conexao.prepareStatement("delete from mydb.tbContrato_has_tbProduto where idContrato = ?");
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
 
+            preparedStatement = conexao.prepareStatement("delete from mydb.tbContrato where idContrato = ?");
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
+
+            preparedStatement.close();
+            conexao.close();
+            System.out.println("Operação executada com sucesso");
+        } catch (SQLException e) {
+            System.out.println("Ocorreu um erro ao deletar produto");
+            //throw new RuntimeException(e);
+        }
     }
 }
