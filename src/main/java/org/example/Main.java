@@ -144,7 +144,7 @@ public class Main {
         } while (opcao != 0);
     }
     public static void menu() {
-        System.out.println("--------Menu--------");
+        System.out.println("---------Menu---------");
         System.out.println("1- Inserir Produto");
         System.out.println("2- Atualizar Produto");
         System.out.println("3- Listar Produtos");
@@ -154,7 +154,7 @@ public class Main {
         System.out.println("7- Listar Contratos");
         System.out.println("8- Deletar Contrato");
         System.out.println("0- Sair");
-        System.out.println("--------------------");
+        System.out.println("----------------------");
         System.out.print("Digite a opção desejada: ");
     }
 
