@@ -2,7 +2,10 @@ package org.example;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Produto {
     private int id;
@@ -103,8 +106,31 @@ public class Produto {
         }
     }
 
-    public void selecionar() {
+    public Produto[] selecionar() {
+        List<Produto> lista = new ArrayList();
+        try {
+            Connection conexao = ConexaoPadrao.conector();
+            PreparedStatement preparedStatement = conexao.prepareStatement("select * from mydb.tbProduto");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                Produto produto = new Produto(
+                        resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getFloat(4),
+                        resultSet.getInt(5)
+                );
+                lista.add(produto);
+            }
 
+            resultSet.close();
+            preparedStatement.close();
+            conexao.close();
+        } catch (SQLException e) {
+            System.out.println("Ocorreu um erro na lista de produtos");
+            //throw new RuntimeException(e);
+        }
+        return lista.toArray(new Produto[0]);
     }
 
     public void deletar(int id) {
@@ -112,15 +138,20 @@ public class Produto {
             Connection conexao = ConexaoPadrao.conector();
             PreparedStatement preparedStatement = conexao.prepareStatement("delete from mydb.tbProduto where id = ?");
 
-            preparedStatement.setInt(1, this.id);
-
+            preparedStatement.setInt(1, id);
             preparedStatement.execute();
 
             preparedStatement.close();
             conexao.close();
         } catch (SQLException e) {
-            System.out.println("Ocorreu um erro na atualização do produto");
+            System.out.println("Ocorreu um erro ao deletar produto");
             //throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("| %-10s | %-20s | %-50s | R$ %.2f   | %-10s |",
+                id, nome, descricao, valorUnitario,idUnidadeMediada);
     }
 }

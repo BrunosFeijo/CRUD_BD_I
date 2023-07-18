@@ -76,7 +76,11 @@ public class Main {
                 }
                 case 3 -> {
                     Produto produto = new Produto();
-                    produto.selecionar();
+                    Produto [] produtos = produto.selecionar();
+
+                    for(Produto prod: produtos){
+                        System.out.println(prod);
+                    }
                 }
                 case 4 -> {
                     System.out.print("Digite o Id do produto que deseja deletar: ");
