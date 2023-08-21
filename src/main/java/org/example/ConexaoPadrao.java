@@ -10,7 +10,7 @@ public class ConexaoPadrao {
         String driver = "com.mysql.cj.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/mydb";
         String usuario = "root";
-        String senha = "Thais2507*";
+        String senha = "senha123*";
 
         try {
             Class.forName(driver);
